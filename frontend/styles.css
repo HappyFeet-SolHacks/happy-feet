@@ -5,7 +5,15 @@
     --background: #000000;
     --text: #FFFFFF;
     --blue: #0A84FF;
-  }
+    --green: #2FD159;
+    --blue_purple: #5E5BE6;
+    --orange:#FF9F0A;
+    --rose:#ff3753;
+    --purple:#bf5bf3;
+    --red:#ff3c44;
+    --sky:#63d2ff;
+    --yellow:#ffd60a;
+}
 
 /* Fonts */
 .playwrite-us-modern-regular {
