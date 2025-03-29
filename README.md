@@ -1,3 +1,3 @@
-# RESTful, a sleep tracking app!
+# Happy Feet
 
-Sleep smarter, not harder! Let our app and your wearable do the heavy lifting to track your sleep and build healthier habits.
+Track steps, build habits, and move forward together.
