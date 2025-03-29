@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playwrite+US+Modern:wght@100..400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+IS:wght@100..400&display=swap');
 
 /* Colors */
 :root {
@@ -9,7 +9,7 @@
 
 /* Fonts */
 .playwrite-us-modern-regular {
-    font-family: "Playwrite US Modern", cursive;
+    font-family: "Playwrite IS", cursive;
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
@@ -22,7 +22,7 @@ body {
 }
 
 h1 {
-    font-family: "Playwrite US Modern", cursive;
+    font-family: "Playwrite IS", cursive;
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
