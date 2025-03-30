@@ -23,7 +23,7 @@ app = FastAPI(title="Happy Feet API", version="1.0.0")
 # Enable CORS for frontend & backend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # replace based on JC's port / setup
+    allow_origins=["http://127.0.0.1:5500"],  # check with JC
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

@@ -48,7 +48,8 @@ h3 {
 
 .scroll-down {
     position: absolute;
-    bottom: 225px;
+    padding: 50px;
+    bottom: 125px;
     font-size: 20px;
     animation: bounce 1.5s infinite;
     cursor: pointer;
@@ -179,3 +180,25 @@ h3 {
     font-weight: bold;
     fill: var(--red);
 }
+
+.link-button-container {
+    margin: 40px auto;
+    text-align: center;
+}
+  
+#connect-button {
+    background-color: var(--blue);
+    color: var(--background);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#connect-button:hover {
+    background-color: var(--light-blue);
+}
+  

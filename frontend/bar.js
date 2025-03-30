@@ -35,5 +35,36 @@ document.addEventListener("DOMContentLoaded", () => {
   progressCircle.style.strokeDashoffset = dashoffset;
   progressText.textContent = `${Math.round(percentage)}%`;
   stepsLeftText.textContent = `${remaining} left`;
-});
 
+  // ========== Connect Button ==========
+  const connectBtn = document.getElementById("connect-button");
+  if (connectBtn) {
+    connectBtn.addEventListener("click", async () => {
+      const clientUserId = "test-user-frontend"; // or dynamically generate
+
+      try {
+        const res = await fetch("http://localhost:8000/link-token", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ client_user_id: clientUserId }),
+        });
+
+        if (!res.ok) {
+          throw new Error(`Server responded with ${res.status}`);
+        }
+
+        const data = await res.json();
+        const link = data.link_web_url; // this is just the token string
+
+        if (link) {
+          window.open(link, "_blank");
+        } else {
+          alert("No link token returned.");
+        }
+      } catch (err) {
+        console.error("Error connecting wearable:", err);
+        alert("Failed to connect. Please try again.");
+      }
+    });
+  }
+});
