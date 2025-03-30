@@ -1,7 +1,8 @@
-pip==23.3.1
+pip==25.0.1
 fastapi
 uvicorn
 httpx
 pydantic
 python-dotenv
 vital
+pytest

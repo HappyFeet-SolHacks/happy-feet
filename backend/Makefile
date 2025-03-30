@@ -1,16 +1,11 @@
-# Makefile
+install:
+	python3 -m venv venv && . venv/bin/activate && pip install -r requirements.txt
 
 run:
-	source venv/bin/activate && uvicorn main:app --reload
-
-install:
-	python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt
-
-freeze:
-	pip freeze > requirements.txt
+	. venv/bin/activate && uvicorn main:app --reload
 
 test:
-	pytest
+	. venv/bin/activate && PYTHONPATH=. pytest
 
 clean:
-	rm -rf __pycache__ .pytest_cachec
+	rm -rf __pycache__ .pytest_cache
