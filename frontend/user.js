@@ -3,34 +3,33 @@ export class User {
     #age;
     #dailyStepGoal;
     #weeklyStepGoal;
-
-    // In the future get user info from backend
-    constructor(name, age, dailyStepGoal, weeklyStepGoal){
-        this.#name = name;
-        this.#age = age;
-        this.#dailyStepGoal = dailyStepGoal;
-        this.#weeklyStepGoal = weeklyStepGoal;
+  
+    constructor(name, age, dailyStepGoal, weeklyStepGoal) {
+      this.#name = name;
+      this.#age = age;
+      this.#dailyStepGoal = dailyStepGoal;
+      this.#weeklyStepGoal = weeklyStepGoal;
     }
-
-    setDailyStepGoal(int){
-        this.#dailyStepGoal = int
+  
+    getDailyStepGoal() {
+      return this.#dailyStepGoal;
     }
-
-    getDailyStepGoal(){
-        return this.#dailyStepGoal
+  
+    getWeeklyStepGoal() {
+      return this.#weeklyStepGoal;
     }
-
-    setWeeklyStepGoal(int){
-        this.#weeklyStepGoal = int
+  
+    setDailyStepGoal(goal) {
+      this.#dailyStepGoal = goal;
     }
-
-    getWeeklyStepGoal(){
-        return this.#weeklyStepGoal
+  
+    setWeeklyStepGoal(goal) {
+      this.#weeklyStepGoal = goal;
     }
-}
-
-// create static users
-export const Sugg = new User("Katie", 22, 10000, 70000);
-export const Chai = new User("Katie", 22, 10000, 70000);
-export const Gopinath = new User("Madhu", 20, 10000, 70000);
-export const Giraud = new User("Nalaya", 21, 10000, 70000);
+  }
+  
+  // Static user instances
+  export const Sugg = new User("Katie", 22, 10000, 70000);
+  export const Chai = new User("Katie", 22, 10000, 70000);
+  export const Gopinath = new User("Madhu", 20, 10000, 70000);
+  export const Giraud = new User("Nalaya", 21, 10000, 70000);  

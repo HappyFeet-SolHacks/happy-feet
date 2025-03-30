@@ -1,81 +1,86 @@
-@import url('https://fonts.googleapis.com/css2?family=Playwrite+IS:wght@100..400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+DK+Loopet:wght@100..400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
-/* Colors */
 :root {
-    --background: #000000;
-    --text: #FFFFFF;
+    --background: #000;
+    --text: #fff;
     --blue: #0A84FF;
+    --light-blue: #63D2FF;
     --green: #2FD159;
-    --red:#ff3c44;
+    --red: #ff3c44;
 }
 
-/* General Styles */
 body {
     margin: 0;
     padding: 0;
-    background-color: var(--background);
+    background: var(--background);
     color: var(--text);
-    font-family: Arial, sans-serif;
+    font-family: "Nunito", sans-serif;
+    font-weight: 800;
     text-align: center;
 }
 
-/* Hero Section */
 .hero {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Full screen height */
+    height: 100vh;
     position: relative;
 }
 
-/* Title */
 h1 {
     font-size: 60px;
-    font-family: "Playwrite IS", cursive;
+    font-family: "Playwrite DK Loopet", cursive;
+    font-weight: 600;
 }
 
-/* Scroll Down Arrow */
+h2 {
+    font-size: 45px;
+    font-family: "Playwrite DK Loopet", cursive;
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 30px;
+    font-weight: 700;
+}
+
 .scroll-down {
     position: absolute;
-    bottom: 20px;
+    bottom: 225px;
     font-size: 20px;
     animation: bounce 1.5s infinite;
     cursor: pointer;
-    font-family: "Playwrite IS", cursive;
+    font-family: "Playwrite DK Loopet", cursive;
 }
 
-/* Bounce Animation */
 @keyframes bounce {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(10px);
-    }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
 }
 
-/* Graphs Section */
+.content {
+    padding: 75px;
+}
+
 .graphs-container {
     display: flex;
-    justify-content: center; /* Center items horizontally */
-    align-items: center; /* Align items vertically */
-    gap: 50px; /* Space between graphs */
-    width: 90%;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 60px;
+    max-width: 1200px;
     margin: auto;
-    padding: 20px;
+    padding: 0 20px;
 }
 
-/* Bar Graph */
 .bar-graph-container {
+    background-color: #1a1a1a;
+    border-radius: 16px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    border-radius: 12px;
 }
 
 .step-graph {
@@ -83,65 +88,70 @@ h1 {
     justify-content: space-around;
     align-items: flex-end;
     width: 100%;
-    max-width: 800px;
-    height: 300px;
-    padding: 40px;
-    background: #f5f5f5;
+    max-width: 660px;
+    height: 260px;
+    padding: 60px 40px 40px 40px;
+    background: var(--text);
     border-radius: 12px;
 }
 
 .bar {
-    width: 80px;
-    background-color: var(--green);
+    width: 60px;
+    margin: 0 5px;
+    background-color: var(--blue);
     border-radius: 8px;
     position: relative;
     transition: 0.3s ease-in-out;
-}
+  }
+  
 
 .bar:hover {
-    background-color: #45a049;
+    background-color: var(--light-blue);
 }
 
 .bar::before {
     content: attr(data-value) " steps";
     position: absolute;
-    top: -20px;
+    top: -40px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 14px;
-    color: black;
+    font-size: 13px;
+    color: var(--background);
     font-weight: bold;
-}
+}  
 
 .bar::after {
     content: attr(data-label);
     position: absolute;
-    bottom: -25px;
+    bottom: -22px;
     left: 50%;
     transform: translateX(-50%);
+    color: var(--background);
     font-size: 16px;
     font-weight: bold;
-    color: black;
 }
 
-/* Circular Progress Graph */
 .progress-container {
-    flex: 0.5;
+    background-color: #1a1a1a;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
+    margin: auto;
+    padding: 30px;
+    border-radius: 16px;
+    padding: 30px;
 }
 
 .progress-ring {
-    width: 180px;
-    height: 180px;
+    width: 200px;
+    height: 200px;
 }
 
 .progress-ring__background {
     fill: none;
-    stroke: #ddd;
+    stroke: var(--text);
     stroke-width: 8;
 }
 
@@ -154,20 +164,18 @@ h1 {
     transition: stroke-dashoffset 0.5s ease;
 }
 
-.progress-ring__text, .progress-ring__steps-left {
-    font-size: 14px;
+.progress-ring__text {
     text-anchor: middle;
     dominant-baseline: middle;
-    fill: black;
-}
-
-.progress-ring__text {
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
+    fill: var(--text);
 }
 
 .progress-ring__steps-left {
-    font-size: 16px;
+    text-anchor: middle;
+    dominant-baseline: middle;
+    font-size: 9px;
     font-weight: bold;
     fill: var(--red);
 }

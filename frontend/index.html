@@ -1,52 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <meta name="author" content="KatieSugg">
-        <meta name="description" content="sample responsive layout">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Happy Feet - Track steps, build habits, and move forward together">
+        <meta name="author" content="KatieSugg, KatieChai">
         <title>Happy Feet</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="./styles.css">
-        <script type="module" src="./bar.js"></script>
-
-        
+        <script type="module" src="./bar.js" defer></script>
       </head>
 
     <body>
         <section class="hero">
-        <h1 class="title">&#128095; Happy Feet</h1>
-        <div class="scroll-down">
-            ⬇ scroll
-        </div>
-    </section>
-
-    <section class="content">
-        <div class="graphs-container">
-            <!-- Left side: Bar Graph -->
-            <div class="bar-graph-container">
-                <h2>Weekly Step Count</h2>
-                <!-- <div class="step-graph"> -->
-                    <!-- Bars will be dynamically inserted by script.js -->
-                <!-- </div> -->
+            <h1 class="title">&#128095; Happy Feet</h1>
+            <div class="scroll-down">
+                ⬇ scroll
             </div>
+        </section>
 
-            <!-- Right side: Circular Progress Graph -->
-            <div class="progress-container">
-                <h2>Daily Goal Progress</h2>
+        <section class="content">
+            <h2>📊 Statistics</h2>
+            <div class="graphs-container">
+              <!-- Left: Bar Graph -->
+              <div class="bar-graph-container">
+                <h3>Weekly Step Count</h3>
+              </div>
+        
+              <!-- Right: Circular Progress Graph -->
+              <div class="progress-container">
+                <h3>Daily Goal Progress</h3>
                 <svg width="300" height="300" viewBox="0 0 100 100" class="progress-ring">
-                    <!-- Background Circle -->
-                    <circle class="progress-ring__background" cx="50" cy="50" r="45" />
-                    <!-- Progress Indicator -->
-                    <circle class="progress-ring__circle" cx="50" cy="50" r="45" />
-                    <!-- Percentage Text -->
-                    <text x="50" y="45" class="progress-ring__text">0%</text>
-                    <!-- Steps Remaining Label -->
-                    <text x="50" y="65" class="progress-ring__steps-left">0 left</text>
+                  <circle class="progress-ring__background" cx="50" cy="50" r="45" />
+                  <circle class="progress-ring__circle" cx="50" cy="50" r="45" />
+                  <text x="50" y="45" class="progress-ring__text">0%</text>
+                  <text x="50" y="65" class="progress-ring__steps-left">0 left</text>
                 </svg>
+              </div>
             </div>
-        </div>
-    </section>
-    
+          </section>
     </body>
 
 

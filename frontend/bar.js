@@ -1,76 +1,39 @@
 import { SuggData } from "./data.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+  // ========== Bar Graph ==========
+  const container = document.querySelector(".bar-graph-container");
+  const stepGraph = document.createElement("div");
+  stepGraph.classList.add("step-graph");
 
-    // populate content section
-    const contentSection = document.querySelector(".content");
-    if (!contentSection) {
-        console.error("Element with class 'content' not found.");
-        return;
-    }
+  const stepData = SuggData.getWeeklyStepList();
+  const maxSteps = Math.max(...stepData, 1);
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
+  stepData.forEach((steps, i) => {
+    const bar = document.createElement("div");
+    bar.classList.add("bar");
+    bar.dataset.label = days[i];
+    bar.dataset.value = steps;
+    bar.style.height = `${(steps / maxSteps) * 100}%`;
+    stepGraph.appendChild(bar);
+  });
 
-    // Create step graph div
-    const stepGraph = document.createElement("div");
-    stepGraph.classList.add("step-graph");
+  container.appendChild(stepGraph);
 
-    // Ensure SuggData is defined
-    if (!SuggData) {
-        console.error("SuggData is undefined.");
-        return;
-    }
+  // ========== Circular Progress Ring ==========
+  const progressCircle = document.querySelector(".progress-ring__circle");
+  const progressText = document.querySelector(".progress-ring__text");
+  const stepsLeftText = document.querySelector(".progress-ring__steps-left");
 
-    // Get step data
-    const weeklyStepList = SuggData.getWeeklyStepList();
-    if (!weeklyStepList) {
-        console.error("weeklyStepList is undefined.");
-        return;
-    }
+  const dailyGoal = SuggData.getUser().getDailyStepGoal();
+  const stepsToday = SuggData.getDailyStepTotal();
+  const remaining = Math.max(dailyGoal - stepsToday, 0);
+  const percentage = (stepsToday / dailyGoal) * 100;
+  const dashoffset = 283 - (percentage / 100) * 283;
 
-    const maxSteps = Math.max(...weeklyStepList) || 1; // Avoid division by zero
-    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-    weeklyStepList.forEach((steps, index) => {
-        const bar = document.createElement("div");
-        bar.classList.add("bar");
-        bar.style.height = `${(steps / maxSteps) * 100}%`;
-        // bar.dataset.label = days[index];
-        bar.dataset.value = steps;
-
-        const label = document.createElement("span");
-        label.classList.add("bar-label");
-        label.textContent = `${days[index]}`;
-        bar.appendChild(label);
-
-        stepGraph.appendChild(bar);
-    });
-
-    contentSection.appendChild(stepGraph);
-    console.log("Step graph added to content.");
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    
-    // Get DOM elements
-    const progressCircle = document.querySelector(".progress-ring__circle");
-    const progressText = document.querySelector(".progress-ring__text");
-    const stepsLeftText = document.querySelector(".progress-ring__steps-left");
-
-    // Get step data
-    const dailyGoal = SuggData.getUser().getDailyStepGoal(); // Assuming this method exists
-    const dailySteps = SuggData.getDailyStepTotal();
-    const stepsRemaining = Math.max(dailyGoal - dailySteps, 0);
-
-    // Update progress percentage
-    const progressPercentage = (dailySteps / dailyGoal) * 100;
-    const offset = 283 - (progressPercentage / 100) * 283; // Adjust stroke-dashoffset
-
-    // Update SVG Circle
-    progressCircle.style.strokeDashoffset = offset;
-    progressText.textContent = `${Math.round(progressPercentage)}%`;
-    stepsLeftText.textContent = `${stepsRemaining} left`;
-
-    console.log(`Daily Steps: ${dailySteps}, Goal: ${dailyGoal}, Remaining: ${stepsRemaining}`);
+  progressCircle.style.strokeDashoffset = dashoffset;
+  progressText.textContent = `${Math.round(percentage)}%`;
+  stepsLeftText.textContent = `${remaining} left`;
 });
 
