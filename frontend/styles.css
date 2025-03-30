@@ -6,32 +6,168 @@
     --text: #FFFFFF;
     --blue: #0A84FF;
     --green: #2FD159;
-    --blue_purple: #5E5BE6;
-    --orange:#FF9F0A;
-    --rose:#ff3753;
-    --purple:#bf5bf3;
     --red:#ff3c44;
-    --sky:#63d2ff;
-    --yellow:#ffd60a;
 }
 
-/* Fonts */
-.playwrite-us-modern-regular {
-    font-family: "Playwrite IS", cursive;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-}
-
-/* General */
+/* General Styles */
 body {
+    margin: 0;
+    padding: 0;
     background-color: var(--background);
-    color: var(--text)
+    color: var(--text);
+    font-family: Arial, sans-serif;
+    text-align: center;
 }
 
+/* Hero Section */
+.hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full screen height */
+    position: relative;
+}
+
+/* Title */
 h1 {
+    font-size: 100px;
     font-family: "Playwrite IS", cursive;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
+}
+
+/* Scroll Down Arrow */
+.scroll-down {
+    position: absolute;
+    bottom: 20px;
+    font-size: 30px;
+    animation: bounce 1.5s infinite;
+    cursor: pointer;
+    font-family: "Playwrite IS", cursive;
+}
+
+/* Bounce Animation */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+}
+
+/* Graphs Section */
+.graphs-container {
+    display: flex;
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Align items vertically */
+    gap: 50px; /* Space between graphs */
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Bar Graph */
+.bar-graph-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.step-graph {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    width: 100%;
+    max-width: 800px;
+    height: 300px;
+    padding: 40px;
+    background: #f5f5f5;
+    border-radius: 12px;
+}
+
+.bar {
+    width: 80px;
+    background-color: var(--green);
+    border-radius: 8px;
+    position: relative;
+    transition: 0.3s ease-in-out;
+}
+
+.bar:hover {
+    background-color: #45a049;
+}
+
+.bar::before {
+    content: attr(data-value) " steps";
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    color: black;
+    font-weight: bold;
+}
+
+.bar::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+}
+
+/* Circular Progress Graph */
+.progress-container {
+    flex: 0.5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.progress-ring {
+    width: 180px;
+    height: 180px;
+}
+
+.progress-ring__background {
+    fill: none;
+    stroke: #ddd;
+    stroke-width: 8;
+}
+
+.progress-ring__circle {
+    fill: none;
+    stroke: var(--green);
+    stroke-width: 8;
+    stroke-dasharray: 283;
+    stroke-dashoffset: 283;
+    transition: stroke-dashoffset 0.5s ease;
+}
+
+.progress-ring__text, .progress-ring__steps-left {
+    font-size: 14px;
+    text-anchor: middle;
+    dominant-baseline: middle;
+    fill: black;
+}
+
+.progress-ring__text {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.progress-ring__steps-left {
+    font-size: 16px;
+    font-weight: bold;
+    fill: var(--red);
 }
