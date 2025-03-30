@@ -1,6 +1,7 @@
+pip==23.3.1
 fastapi
 uvicorn
 httpx
 pydantic
 python-dotenv
-vital==2.1.219
+vital
