@@ -42,13 +42,19 @@ def test_get_connections():
     user_id = get_or_create_user_id()
     response = client.get(f"/connections/{user_id}")
     assert response.status_code in [200, 500]  # 500 if no device connected yet
+    
+def test_webhook():
+    payload = {"test": "data"}
+    response = client.post("/webhook", json=payload)
+    assert response.status_code == 200
+    assert response.json() == {"status": "ok"}
 
 def test_activity_data():
     user_id = get_or_create_user_id()
     response = client.get(f"/activity/{user_id}")
     assert response.status_code in [200, 500]  # 500 if no activity yet
     if response.status_code == 200:
-        assert "activities" in response.json()
+        assert "activity" in response.json()
 
 def test_sleep_data():
     user_id = get_or_create_user_id()
@@ -56,9 +62,14 @@ def test_sleep_data():
     assert response.status_code in [200, 500]  # 500 if no sleep data
     if response.status_code == 200:
         assert "sleep" in response.json()
+        
+def test_workout_data():
+    user_id = get_or_create_user_id()
+    response = client.get(f"/workouts/{user_id}")
+    assert response.status_code in [200, 500]  # 500 if no workout data
 
-def test_webhook():
-    payload = {"test": "data"}
-    response = client.post("/webhook", json=payload)
-    assert response.status_code == 200
-    assert response.json() == {"status": "ok"}
+    if response.status_code == 200:
+        data = response.json()
+        assert isinstance(data, dict)
+        assert "workouts" in data
+        assert isinstance(data["workouts"], list)

@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from vital.client import Vital
 from vital.environment import VitalEnvironment
+from datetime import date
 import os
 from dotenv import load_dotenv
 
@@ -78,7 +79,7 @@ def generate_link_token(data: CreateUserRequest):
     try:
         # Fetch the Vital user_id first
         user = client.user.create(client_user_id=data.client_user_id)
-        user_id = user["user_id"]
+        user_id = user.user_id
         token = client.link.token(user_id=user_id)
         return token
     except Exception as e:
@@ -112,7 +113,7 @@ def get_user_connections(user_id: str):
     Returns wearables and their connection status by user_id
     """
     try:
-        connections = client.connections.get_user_connections(user_id=user_id)
+        connections = client.user.get_connected_providers(user_id)
         return connections
     except Exception as e:
         print("Error:", e)
@@ -131,27 +132,64 @@ async def receive_webhook(request: Request):
     except Exception as e:
         raise HTTPException(status_code=400, detail="Invalid webhook payload")
     
+from datetime import datetime, timedelta
+
 @app.get("/activity/{user_id}")
 def get_activity(user_id: str):
     """
-    Get step/activity data by user_id
+    Get step/activity summary data by user_id
     """
     try:
-        data = client.activity.get_user_activity(user_id=user_id)
+        # get data from the last 30 days
+        end_date = datetime.utcnow().date()
+        start_date = end_date - timedelta(days=30)
+
+        data = client.activity.get(
+            user_id=user_id,
+            start_date=start_date.isoformat(),
+            end_date=end_date.isoformat()
+        )
         return data
     except Exception as e:
         print("Error getting activity:", e)
         raise HTTPException(status_code=500, detail=str(e))
 
+from datetime import datetime, timedelta
 
 @app.get("/sleep/{user_id}")
 def get_sleep(user_id: str):
     """
-    Get sleep data by user_id
+    Get sleep summary data by user_id
     """
     try:
-        data = client.sleep.get_user_sleep(user_id=user_id)
+        end_date = datetime.utcnow().date()
+        start_date = end_date - timedelta(days=30)
+
+        data = client.sleep.get(
+            user_id=user_id,
+            start_date=start_date.isoformat(),
+            end_date=end_date.isoformat()
+        )
         return data
     except Exception as e:
         print("Error getting sleep:", e)
+        raise HTTPException(status_code=500, detail=str(e))
+    
+@app.get("/workouts/{user_id}")
+def get_workouts(user_id: str):
+    """
+    Get workout summary data (e.g. from Strava) by user_id
+    """
+    try:
+        start_date = date.today().replace(day=1).isoformat()  # start of this month
+        end_date = date.today().isoformat()  # today
+
+        workouts = client.workouts.get(
+            user_id=user_id,
+            start_date=start_date,
+            end_date=end_date
+        )
+        return workouts
+    except Exception as e:
+        print("Error getting workouts:", e)
         raise HTTPException(status_code=500, detail=str(e))
